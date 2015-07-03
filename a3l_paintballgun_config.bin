@@ -1,0 +1,264 @@
+#define private		0
+#define protected		1
+#define public		2
+
+#define true	1
+#define false	0
+
+enum {
+	STABILIZEDINAXISX = 1,
+	STABILIZEDINAXESXYZ = 4,
+	STABILIZEDINAXISY = 2,
+	STABILIZEDINAXESBOTH = 3,
+	STABILIZEDINAXESNONE = 0,
+};
+
+class CfgPatches {
+	class Test_weapon_F {
+		units[] = {};
+		weapons[] = {"A3L_PaintballGun_red", "A3L_PaintballGun_blue", "A3L_PaintballGun_pink"};
+		requiredVersion = 0.1;
+		requiredAddons[] = {"A3_Weapons_F"};
+	};
+};
+class Mode_SemiAuto;	// External class reference
+class Mode_Burst;	// External class reference
+class Mode_FullAuto;	// External class reference
+class SlotInfo;	// External class reference
+class CowsSlot;	// External class reference
+class PointerSlot;	// External class reference
+
+class cfgRecoils {
+	recoil_single_Test_rifle_01[] = {0, 0, 0, 0.03, 36.943*((0.001))*(0.3), 3.587*((0.004))*(3), 0.03, 31.817*((0.001))*(0.5), 1.251*((0.004))*(3.4), 0.03, 19.755*((0.001))*(0.7), 0.764*((0.004))*(3.8), 0.06, 7.388*((0.001))*(0.9), 0.285*((0.004))*(4.2), 0.06, -2.402*((0.001))*(0.3), -0.096*((0.004))*(7), 0.06, -3.53*((0.001))*(0.5), -0.141*((0.004))*(5), 0.06, -3.677*((0.001))*(0.5), -0.147*((0.004))*(3), 0.06, -3.138*((0.001))*(0.3), -0.125*((0.004))*(1), 0.06, 0, 0};
+	recoil_single_prone_Test_rifle_01[] = {0, 0, 0, 0.03, 36.943*((0.001))*(0.3), 3.587*((0.004))*(0.7), 0.03, 31.817*((0.001))*(0.5), 1.251*((0.004))*(1.1), 0.03, 19.755*((0.001))*(0.7), 0.764*((0.004))*(1.5), 0.06, 7.388*((0.001))*(0.9), 0.285*((0.004))*(1.9), 0.06, -2.402*((0.001))*(0.3), -0.096*((0.004))*(2), 0.06, -3.53*((0.001))*(0.5), -0.141*((0.004))*(1), 0.06, -3.677*((0.001))*(0.5), -0.147*((0.004))*(0.5), 0.06, -3.138*((0.001))*(0.3), -0.125*((0.004))*(0.3), 0.06, 0, 0};
+	recoil_auto_Test_rifle_01[] = {0, 0, 0, 0.06, 36.943*((0.001))*(1.2), 3.587*((0.004))*(1.7), 0.06, 31.817*((0.001))*(1.5), 1.251*((0.004))*(2.1), 0.06, 19.755*((0.001))*(1.7), 0.764*((0.004))*(2.4), 0.06, 7.388*((0.001))*(1.9), 0.285*((0.004))*(2.8), 0.03, -2.402*((0.001))*(0.3), -0.096*((0.004))*(7), 0.03, -3.53*((0.001))*(0.5), -0.141*((0.004))*(5), 0.03, -3.677*((0.001))*(0.5), -0.147*((0.004))*(3), 0.06, 0, 0};
+	recoil_auto_prone_Test_rifle_01[] = {0, 0, 0, 0.06, 36.943*((0.001))*(1.2), 3.587*((0.004))*(0.3), 0.06, 31.817*((0.001))*(1.5), 1.251*((0.004))*(0.7), 0.06, 19.755*((0.001))*(1.7), 0.764*((0.004))*(1.1), 0.06, 7.388*((0.001))*(1.9), 0.285*((0.004))*(1.5), 0.03, -2.402*((0.001))*(0.3), -0.096*((0.004))*(4), 0.03, -3.53*((0.001))*(0.5), -0.141*((0.004))*(2), 0.03, -3.677*((0.001))*(0.5), -0.147*((0.004))*(1), 0.06, 0, 0};
+};
+
+class CfgMagazines {
+	class Default;	// External class reference
+	class CA_Magazine;	// External class reference
+	
+	class paintballs : CA_Magazine {
+		scope = public;
+		displayName = "Paint Balls";
+		model = "\A3L_PaintBallGun\paintballs";
+		picture = "\A3L_PaintBallGun\paintball_icon.paa";
+		ammo = "paint_balls";
+		count = 3000;
+		initSpeed = 795;
+		tracersEvery = 1;
+		lastRoundsTracer = 9;
+		descriptionShort = "Hem's Badass Balls!";
+	};
+};
+
+class CfgAmmo {
+	class BulletBase;	// External class reference
+	
+	class paint_balls : BulletBase {
+		hit = 0.5;
+		indirectHit = 0.02;
+		indirectHitRange = 0.02;
+		cartridge = "";
+		visibleFire = 6;	// how much is visible when this weapon is fired
+		audibleFire = 8;
+		cost = 1.2;
+		airLock = true;
+		typicalSpeed = 140;
+		caliber = 0.008;
+		craterEffects = "cal68_impact_red";
+		explosionEffects = "cal68_impact_red";
+		model = "\A3\Weapons_f\Data\bullettracer\tracer_red";
+		tracerScale = 1.0;
+		tracerStartTime = 0.02;
+		tracerEndTime = 3.5;
+		airFriction = -0.032;
+		
+		class CamShakeFire {
+			power = 0;
+			duration = 0;
+			frequency = 0;
+			distance = 0;
+		};
+		
+		class CamShakePlayerFire {
+			power = 0;
+			duration = 0;
+			frequency = 0;
+			distance = 0;
+		};
+	};
+};
+
+class CfgWeapons {
+	class Rifle;	// External class reference
+	
+	class Rifle_Base_F : Rifle {
+		class WeaponSlotsInfo;	// External class reference
+		class GunParticles;	// External class reference
+	};
+	class UGL_F;	// External class reference
+	
+	class Test_weapon_01_Base_F : Rifle_Base_F {
+		magazines[] = {"paintballs"};
+		reloadAction = "GestureReloadMX";
+		discreteDistanceInitIndex = 0;
+		maxRecoilSway = 0.0125;
+		swayDecaySpeed = 1.25;
+		
+		class GunParticles : GunParticles {
+			class SecondEffect {
+				positionName = "Nabojnicestart";
+				directionName = "Nabojniceend";
+				effectName = "smokeshell";
+			};
+		};
+		
+		class WeaponSlotsInfo : WeaponSlotsInfo {
+			class MuzzleSlot : SlotInfo {
+				linkProxy = "\A3\data_f\proxies\weapon_slots\MUZZLE";
+				compatibleItems[] = {"test_suppressor"};
+			};
+			
+			class CowsSlot : CowsSlot {};
+			
+			class PointerSlot : PointerSlot {};
+		};
+		opticsZoomMin = 0.375;
+		opticsZoomMax = 1.1;
+		opticsZoomInit = 0.75;
+		distanceZoomMin = 300;
+		distanceZoomMax = 300;
+		descriptionShort = "PaintBall Gun";
+		handAnim[] = {"OFP2_ManSkeleton", "\A3\Weapons_F\Rifles\MX\data\Anim\MX_gl.rtm"};
+		dexterity = 1.8;
+		caseless[] = {"", 1, 1, 1};
+		soundBullet[] = {"caseless", 1};
+		selectionFireAnim = "muzzleFlash";
+		modes[] = {"Single", "FullAuto", "fullauto_medium", "single_medium_optics1", "single_far_optics2"};
+		
+		class Single : Mode_SemiAuto {
+			begin1[] = {"A3L_PaintBallGun\sounds\shoot.ogg", 1.41254, 1, 1200};
+			begin2[] = {"A3L_PaintBallGun\sounds\shoot.ogg", 1.41254, 1, 1200};
+			soundBegin[] = {"begin1", 0.5, "begin2", 0.5};
+			closure1[] = {"A3L_PaintBallGun\sounds\shoot.ogg", 1.41254, 1, 10};
+			closure2[] = {"A3L_PaintBallGun\sounds\shoot.ogg", 1.41254, 1, 10};
+			soundClosure[] = {"closure1", 0.5, "closure2", 0.5};
+			weaponSoundEffect = "DefaultRifle";
+			reloadTime = 0.096;
+			dispersion = 0.00087;
+			recoil = "recoil_single_Test_rifle_01";
+			recoilProne = "recoil_single_prone_Test_rifle_01";
+			minRange = 2;
+			minRangeProbab = 0.5;
+			midRange = 200;
+			midRangeProbab = 0.7;
+			maxRange = 400;
+			maxRangeProbab = 0.3;
+		};
+		
+		class FullAuto : Mode_FullAuto {
+			begin1[] = {"A3L_PaintBallGun\sounds\shoot.ogg", 1.41254, 1, 1200};
+			begin2[] = {"A3L_PaintBallGun\sounds\shoot.ogg", 1.41254, 1, 1200};
+			soundBegin[] = {"begin1", 0.5, "begin2", 0.5};
+			closure1[] = {"A3L_PaintBallGun\sounds\shoot.ogg", 1.41254, 1, 10};
+			closure2[] = {"AA3L_PaintBallGun\sounds\shoot.ogg", 1.41254, 1, 10};
+			soundClosure[] = {"closure1", 0.5, "closure2", 0.5};
+			weaponSoundEffect = "DefaultRifle";
+			reloadTime = 0.096;
+			dispersion = 0.00087;
+			recoil = "recoil_auto_Test_rifle_01";
+			recoilProne = "recoil_auto_prone_Test_rifle_01";
+			minRange = 0;
+			minRangeProbab = 0.9;
+			midRange = 15;
+			midRangeProbab = 0.7;
+			maxRange = 30;
+			maxRangeProbab = 0.1;
+			aiRateOfFire = 1e-006;	// delay between shots at given distance
+		};
+		
+		class fullauto_medium : FullAuto {
+			showToPlayer = false;
+			burst = 3;
+			minRange = 2;
+			minRangeProbab = 0.5;
+			midRange = 75;
+			midRangeProbab = 0.7;
+			maxRange = 150;
+			maxRangeProbab = 0.05;
+			aiRateOfFire = 2.0;	// delay between shots at given distance
+			aiRateOfFireDistance = 200;
+		};
+		
+		class single_medium_optics1 : Single {
+			requiredOpticType = 1;
+			showToPlayer = false;
+			minRange = 2;
+			minRangeProbab = 0.2;
+			midRange = 450;
+			midRangeProbab = 0.7;
+			maxRange = 600;
+			maxRangeProbab = 0.2;
+			aiRateOfFire = 6;	// delay between shots at given distance
+			aiRateOfFireDistance = 600;
+		};
+		
+		class single_far_optics2 : single_medium_optics1 {
+			requiredOpticType = 2;
+			showToPlayer = false;
+			minRange = 100;
+			minRangeProbab = 0.1;
+			midRange = 500;
+			midRangeProbab = 0.6;
+			maxRange = 700;
+			maxRangeProbab = 0.05;
+			aiRateOfFire = 8;	// delay between shots at given distance
+			aiRateOfFireDistance = 700;
+		};
+		aiDispersionCoefY = 6.0;
+		aiDispersionCoefX = 4.0;
+		drySound[] = {"A3L_PaintBallGun\sounds\shoot.ogg", 0.562341, 1, 10};
+		reloadMagazineSound[] = {"A3L_PaintBallGun\sounds\reload.ogg", 0.398107, 1, 30};
+	};
+	
+	class A3L_PaintballGun_red : Test_weapon_01_Base_F {
+		scope = public;
+		displayName = "A3L Paintball Gun Red";
+		model = "\A3L_PaintBallGun\paintballgun_red.p3d";
+		picture = "\A3L_PaintBallGun\paintballgun_icon_red.paa";
+		UiPicture = "\A3L_PaintBallGun\paintballgun_icon_red.paa";
+		weaponInfoType = "RscWeaponZeroing";
+		
+		class WeaponSlotsInfo : WeaponSlotsInfo {
+			mass = 100;
+		};
+	};
+	
+	class A3L_PaintballGun_blue : Test_weapon_01_Base_F {
+		scope = public;
+		displayName = "A3L Paintball Gun Blue";
+		model = "\A3L_PaintBallGun\paintballgun_blue.p3d";
+		picture = "\A3L_PaintBallGun\paintballgun_icon_blue.paa";
+		UiPicture = "\A3L_PaintBallGun\paintballgun_icon_blue.paa";
+		weaponInfoType = "RscWeaponZeroing";
+		
+		class WeaponSlotsInfo : WeaponSlotsInfo {
+			mass = 100;
+		};
+	};
+	
+	class A3L_PaintballGun_pink : Test_weapon_01_Base_F {
+		scope = public;
+		displayName = "A3L Paintball Gun Pink";
+		model = "\A3L_PaintBallGun\paintballgun_pink.p3d";
+		picture = "\A3L_PaintBallGun\paintballgun_icon_pink.paa";
+		UiPicture = "\A3L_PaintBallGun\paintballgun_icon_pink.paa";
+		weaponInfoType = "RscWeaponZeroing";
+		
+		class WeaponSlotsInfo : WeaponSlotsInfo {
+			mass = 100;
+		};
+	};
+};
